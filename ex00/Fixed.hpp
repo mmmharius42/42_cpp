@@ -6,7 +6,7 @@
 /*   By: mpapin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 02:48:26 by mpapin            #+#    #+#             */
-/*   Updated: 2025/09/06 02:52:59 by mpapin           ###   ########.fr       */
+/*   Updated: 2025/09/06 03:05:42 by mpapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 class Fixed {
     private:
         int                 _fixedPointValue;
+        const  int          _intValue;
         static const int    _fractionalBits = 8;
 
     public:

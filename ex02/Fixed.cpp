@@ -6,7 +6,7 @@
 /*   By: mpapin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 02:48:23 by mpapin            #+#    #+#             */
-/*   Updated: 2025/09/06 03:30:56 by mpapin           ###   ########.fr       */
+/*   Updated: 2025/09/15 14:46:33 by mpapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ Fixed::Fixed(const int value) {
     _fixedPointValue = value << _fractionalBits; }
 
 Fixed::Fixed(const float value) {
-    float scaled = value * (1 << _fractionalBits);
-    _fixedPointValue = (int)roundf(scaled); }
+    _fixedPointValue = (int)roundf(value * (1 << _fractionalBits)); }
 
 int Fixed::getRawBits(void) const {
     return _fixedPointValue; }
@@ -95,7 +94,8 @@ const Fixed& Fixed::min(const Fixed& a, const Fixed& b) {
 Fixed& Fixed::max(Fixed& a, Fixed& b) {
     return (a > b ? a : b); }
 
-const Fixed& Fixed::max(const Fixed& a, const Fixed& b) { return (a > b ? a : b); }
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b) { 
+    return (a > b ? a : b); }
 
 std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
     out << fixed.toFloat();

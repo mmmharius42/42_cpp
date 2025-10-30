@@ -1,33 +1,31 @@
 NAME = fixed
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCDIR = .
-OBJDIR = obj
+CC = c++
+CCFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes
+SRC = .
+OBJ = obj
 
-SRCS = main.cpp Fixed.cpp
-OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
+SRCS = main.cpp src/Fixed.cpp
+OBJS = $(addprefix $(OBJ)/, $(notdir $(SRCS:.cpp=.o)))
 
-all: $(OBJDIR) $(NAME)
+all: $(OBJ) $(NAME)
 
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
+$(OBJ):
+	mkdir -p $(OBJ)
 
 $(NAME): $(OBJS)
-	@echo "$(GREEN)Linking $(NAME)...$(NC)"
-	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-	@echo "$(GREEN)$(NAME) compiled successfully!$(NC)"
+	$(CC) $(CCFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	@echo "Compiling $<..."
-	@$(CXX) $(CXXFLAGS) -c $< -o $@
+$(OBJ)/%.o: $(SRC)/%.cpp
+	$(CC) $(CCFLAGS) -c $< -o $@
+
+$(OBJ)/%.o: $(SRC)/src/%.cpp
+	$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
-	@echo "$(RED)Cleaning object files...$(NC)"
-	@rm -rf $(OBJDIR)
+	rm -rf $(OBJ)
 
 fclean: clean
-	@echo "$(RED)Cleaning executable...$(NC)"
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

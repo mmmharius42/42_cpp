@@ -1,6 +1,6 @@
 NAME = array
 CC = c++
-CCFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes
+CCFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes -Isrc
 SRC = .
 OBJ = obj
 

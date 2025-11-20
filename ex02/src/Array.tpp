@@ -6,7 +6,7 @@
 /*   By: mpapin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 14:47:08 by mpapin            #+#    #+#             */
-/*   Updated: 2025/11/19 15:26:14 by mpapin           ###   ########.fr       */
+/*   Updated: 2025/11/20 15:59:39 by mpapin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,28 @@ Array<T>::Array(void) : _array(NULL), _size(0) {}
 template <typename T>
 Array<T>::Array(unsigned int n) : _array(new T[n]()), _size(n) {}
 
-
 template <typename T>
-Array<T>::Array(const Array& other) : _elements(NULL), _size(0) {
-    std::cout << "Array copy constructor called" << std::endl;
+Array<T>::Array(const Array& other) : _array(NULL), _size(0) {
     *this = other;
 }
 
 template <typename T>
 Array<T>::~Array() {
-    std::cout << "Array destructor called" << std::endl;
-    delete[] _elements;
+    delete[] _array;
 }
 
 template <typename T>
 Array<T>& Array<T>::operator=(const Array& other) {
-    std::cout << "Array assignment operator called" << std::endl;
-    
     if (this != &other) {
-        delete[] _elements;
+        delete[] _array;
         _size = other._size;
         if (_size > 0) {
-            _elements = new T[_size];
+            _array = new T[_size];
             for (unsigned int i = 0; i < _size; i++) {
-                _elements[i] = other._elements[i];
+                _array[i] = other._array[i];
             }
         } else {
-            _elements = NULL;
+            _array = NULL;
         }
     }
     
@@ -56,17 +51,17 @@ Array<T>& Array<T>::operator=(const Array& other) {
 template <typename T>
 T& Array<T>::operator[](unsigned int index) {
     if (index >= _size) {
-        throw std::exception();
+        throw Bounds();
     }
-    return _elements[index];
+    return _array[index];
 }
 
 template <typename T>
 const T& Array<T>::operator[](unsigned int index) const {
     if (index >= _size) {
-        throw std::exception();
+        throw Bounds();
     }
-    return _elements[index];
+    return _array[index];
 }
 
 template <typename T>
